@@ -18,6 +18,6 @@ git commit -m "Generate artifacts"
 git push -f origin master-node_modules
 git tag -a "v$version" -m "v$version"
 git push origin "v$version"
-git co master
+git checkout master
 rm -rf node_modules
 yarn install
