@@ -8,7 +8,6 @@ const bin = path.join(homedir, "bin");
 export async function install(javaVersion: string, jabbaVersion: string) {
   setEnvironmentVariableCI();
   installJava(javaVersion, jabbaVersion);
-  installSbt();
 }
 
 function setEnvironmentVariableCI() {
@@ -69,20 +68,6 @@ function installJava(javaVersion: string, jabbaVersion: string) {
     .stdout.trim();
   core.exportVariable("JAVA_HOME", javaHome);
   core.addPath(path.join(javaHome, "bin"));
-  core.endGroup();
-}
-
-function installSbt() {
-  core.startGroup("Install sbt");
-  core.addPath(bin);
-  curl(
-    "https://raw.githubusercontent.com/paulp/sbt-extras/master/sbt",
-    path.join(bin, "sbt")
-  );
-  curl(
-    "https://raw.githubusercontent.com/coursier/sbt-extras/master/sbt",
-    path.join(bin, "csbt")
-  );
   core.endGroup();
 }
 
